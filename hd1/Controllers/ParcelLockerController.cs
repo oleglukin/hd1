@@ -1,5 +1,4 @@
-﻿using hd1.Models;
-using hd1.Services;
+﻿using hd1.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace hd1.Controllers;
@@ -17,7 +16,14 @@ public class ParcelLockerController : ControllerBase
 
     // GET: api/<ParcelLockerController>
     [HttpGet]
-    public IEnumerable<ParcelLocker> Get() => _parcelLockerService.GetActiveParcelLockers();
+    public IActionResult Get()
+    {
+        return _parcelLockerService.GetActiveParcelLockers() switch
+        {
+            var items when items.Any() => Ok(items),
+            _ => NotFound(),
+        };
+    }
 
     // GET api/<ParcelLockerController>/5
     [HttpGet("{id}")]

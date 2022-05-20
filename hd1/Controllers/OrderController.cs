@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using hd1.Models;
+using hd1.Services;
+using Microsoft.AspNetCore.Mvc;
 
 namespace hd1.Controllers;
 
@@ -6,36 +8,64 @@ namespace hd1.Controllers;
 [ApiController]
 public class OrderController : ControllerBase
 {
-    // GET: api/<OrderController>
-    [HttpGet]
-    public IEnumerable<string> Get()
+    private readonly IOrderService _orderService;
+
+    public OrderController(IOrderService orderService)
     {
-        return new string[] { "value1", "value2" };
+        _orderService = orderService;
     }
 
+
     // GET api/<OrderController>/5
+    /// <summary>
+    /// Tracking order (get info by id)
+    /// </summary>
     [HttpGet("{id}")]
-    public string Get(int id)
+    public IActionResult Get(int id)
     {
-        return "value";
+        return _orderService.GetOrder(id) switch
+        {
+            { } order => Ok(order),
+            _ => NotFound(),
+        };
     }
 
     // POST api/<OrderController>
+    /// <summary>
+    /// Create new order
+    /// </summary>
     [HttpPost]
-    public void Post([FromBody] string value)
+    public IActionResult Post([FromBody] Order value)
     {
+        var result = false;
+        if (!value.ValidationErrors().Any())
+        {
+            result = _orderService.Create(value);
+        }
+
+        return result switch
+        {
+            true => Ok(),
+            _ => StatusCode(500),
+        };
     }
 
     // PUT api/<OrderController>/5
-    [HttpPut("{id}")]
-    public void Put(int id, [FromBody] string value)
+    /// <summary>
+    /// Update order information
+    /// </summary>
+    [HttpPut]
+    public void Put([FromBody] Order value)
     {
     }
 
-    // DELETE api/<OrderController>/5
-    [HttpDelete("{id}")]
-    public void Delete(int id)
+    [HttpPut("cancel/{id}")]
+    public IActionResult Cancel(int id)
     {
+        return _orderService.Cancel(id) switch
+        {
+            true => Ok(),
+            _ => StatusCode(500),
+        };
     }
 }
-

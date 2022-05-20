@@ -1,5 +1,8 @@
-﻿namespace hd1.Repositories;
+﻿using hd1.Models;
+using hd1.Repositories.InMemory;
 
-public interface IParcelLockerRepository
+namespace hd1.Repositories;
+
+public interface IParcelLockerRepository : IInMemoryRepository<string, ParcelLocker>
 {
 }

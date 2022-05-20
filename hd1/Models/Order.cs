@@ -2,10 +2,15 @@
     
 public class Order
 {
+    private int? _id;
     /// <summary>
     /// Order number
     /// </summary>
-    public int Id { get; set; }
+    public int Id
+    {
+        get => _id ?? 0;
+        set => _id ??= value; // can be assigned once only
+    }
 
     public int Status { get; set; }
 
@@ -20,6 +25,7 @@ public class Order
         _ => OrderStatus.Invalid,
     };
 
+    private const int MaximumItems = 10;
     public string[]? Items { get; set; }
 
     public decimal Total { get; set; }
@@ -29,6 +35,24 @@ public class Order
     public string? CustomerPhoneNumber { get; set; }
 
     public string? CustomerFullName { get; set; }
+
+    public IEnumerable<string> ValidationErrors()
+    {
+        var errors = new List<string>();
+        if (StatusEnum is OrderStatus.Invalid)
+        {
+            errors.Add("Invalid status");
+        }
+
+        if (Items is not null && Items.Length > MaximumItems)
+        {
+            errors.Add($"Number of order items ({Items.Length}) is larger than maximum allowed ({MaximumItems})");
+        }
+
+        // TODO validate customer phone number
+
+        return errors;
+    }
 }
 
 public enum OrderStatus

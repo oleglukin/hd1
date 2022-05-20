@@ -2,7 +2,16 @@
 
 public class ParcelLocker
 {
-    public string? Id { get; set; }
+    private string? _id;
+
+    /// <summary>
+    /// Parcel locker number
+    /// </summary>
+    public string Id
+    {
+        get => _id ?? string.Empty;
+        set => _id ??= value; // can be assigned once only
+    }
 
     public string? Address { get; set; }
 
