@@ -25,7 +25,7 @@ public class OrderService : IOrderService
         }
         else
         {
-            Console.WriteLine($@"Cannot cancel. Order {id} is not found");
+            Console.WriteLine($@"Cannot cancel. Order {id} is not found"); // TODO log errors with ILogger
         }
 
         return result;
@@ -34,14 +34,22 @@ public class OrderService : IOrderService
     public bool Create(Order order)
     {
         var result = false;
-        if (!order.ValidationErrors().Any()
-            && _orderRepository.GetById(order.Id) is not null
-            && LockerExistsAndActive(order)
-            )
+        if (order.ValidationErrors().Any())
         {
-            result = _orderRepository.Update(order.Id, order);
+            Console.WriteLine(string.Join('\n', order.ValidationErrors()));
         }
-        // TODO log why it cannot create order if there are errors, maybe add try-catch
+        else if (_orderRepository.GetById(order.Id) is not null)
+        {
+            Console.WriteLine($@"Order with id {order.Id} already exists. Cannot create");
+        }
+        else if (!LockerExistsAndActive(order))
+        {
+            Console.WriteLine($@"Locker {order.ParcelLockerId} doesn't exist or is not active");
+        }
+        else
+        {
+            result = _orderRepository.Create(order.Id, order);
+        }
         return result;
     }
 
@@ -52,7 +60,7 @@ public class OrderService : IOrderService
             && LockerExistsAndActive(order)
             )
         {
-            result = _orderRepository.Create(order.Id, order);
+            result = _orderRepository.Update(order.Id, order);
         }
         // TODO log why it cannot update order if there are errors, maybe add try-catch
         return result;

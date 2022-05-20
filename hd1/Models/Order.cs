@@ -60,8 +60,6 @@ public class Order
             errors.Add("Customer phone number is unknown or has invalid format");
         }
 
-        // TODO validate customer phone number, use regexp
-
         return errors;
     }
 }
