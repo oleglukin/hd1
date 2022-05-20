@@ -1,0 +1,56 @@
+[
+  {
+    "id": 1,
+    "status": 2,
+    "items": [ "tooth brush", "item-1", "item-2", "brom-x" ],
+    "total": 9541.2,
+    "parcelLockerId": "1651-489",
+    "customerPhoneNumber": "+7915-448-12-95",
+    "customerFullName": "Roxanne Nichols"
+  },
+  {
+    "id": 2,
+    "status": 3,
+    "items": [ "item-2" ],
+    "total": 120,
+    "parcelLockerId": "6230-990",
+    "customerPhoneNumber": "+7489-150-01-00",
+    "customerFullName": "Abigail Lowery"
+  },
+  {
+    "id": 3,
+    "status": 1,
+    "items": [ "teddy bear", "item-2" ],
+    "total": 512,
+    "parcelLockerId": "3002-481",
+    "customerPhoneNumber": "+7914-110-55-02",
+    "customerFullName": "Ruth Davies"
+  },
+  {
+    "id": 4,
+    "status": 4,
+    "items": [ "tooth brush", "brom-x" ],
+    "total": 256,
+    "parcelLockerId": "3002-481",
+    "customerPhoneNumber": "+7995-568-12-01",
+    "customerFullName": "Tina Mccormick"
+  },
+  {
+    "id": 5,
+    "status": 6,
+    "items": [ "item-2" ],
+    "total": 20.87,
+    "parcelLockerId": "6540-598",
+    "customerPhoneNumber": "+7995-152-15-92",
+    "customerFullName": "Zahra Rhodes"
+  },
+  {
+    "id": 6,
+    "status": 5,
+    "items": [ "ram stick" ],
+    "total": 678.62,
+    "parcelLockerId": "6230-990",
+    "customerPhoneNumber": "+7932-160-09-07",
+    "customerFullName": "Summer Fitzpatrick"
+  }
+]

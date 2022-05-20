@@ -1,0 +1,37 @@
+[
+  {
+    "id": "1651-489",
+    "address": "19 Ann St, Chemtown",
+    "active": true
+  },
+  {
+    "id": "9543-110",
+    "address": "453 Edwards Rd, Ascot",
+    "active": true
+  },
+  {
+    "id": "1510-429",
+    "address": "lv429 doookdf~~ ffertn",
+    "active": false
+  },
+  {
+    "id": "6230-990",
+    "address": "421-1165, Otoze, Aizumi-cho Itano-gun, Tokushima",
+    "active": true
+  },
+  {
+    "id": "3002-481",
+    "address": "381-1135, Okawacho, Kushiro-shi, Hokkaido",
+    "active": true
+  },
+  {
+    "id": "7846-010",
+    "address": "497-1257, Asahicho, Tokorozawa-shi, Saitama",
+    "active": false
+  },
+  {
+    "id": "6540-598",
+    "address": "Jl Telaga Permata 42, Dki Jakarta",
+    "active": true
+  }
+]
