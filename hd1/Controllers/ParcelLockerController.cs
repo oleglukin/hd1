@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using hd1.Models;
+using hd1.Services;
+using Microsoft.AspNetCore.Mvc;
 
 namespace hd1.Controllers;
 
@@ -6,36 +8,26 @@ namespace hd1.Controllers;
 [ApiController]
 public class ParcelLockerController : ControllerBase
 {
+    private readonly IParcelLockerService _parcelLockerService;
+
+    public ParcelLockerController(IParcelLockerService parcelLockerService)
+    {
+        _parcelLockerService = parcelLockerService;
+    }
+
     // GET: api/<ParcelLockerController>
     [HttpGet]
-    public IEnumerable<string> Get()
-    {
-        return new string[] { "value1", "value2" };
-    }
+    public IEnumerable<ParcelLocker> Get() => _parcelLockerService.GetActiveParcelLockers();
 
     // GET api/<ParcelLockerController>/5
     [HttpGet("{id}")]
-    public string Get(int id)
+    public IActionResult Get(string id)
     {
-        return "value";
-    }
-
-    // POST api/<ParcelLockerController>
-    [HttpPost]
-    public void Post([FromBody] string value)
-    {
-    }
-
-    // PUT api/<ParcelLockerController>/5
-    [HttpPut("{id}")]
-    public void Put(int id, [FromBody] string value)
-    {
-    }
-
-    // DELETE api/<ParcelLockerController>/5
-    [HttpDelete("{id}")]
-    public void Delete(int id)
-    {
+        return _parcelLockerService.GetParcelLocker(id) switch
+        {
+            { } locker => Ok(locker),
+            _ => NotFound(),
+        };
     }
 }
 

@@ -23,6 +23,7 @@ if (app.Environment.IsDevelopment())
 }
 
 builder.Services.AddDataStorage(builder.Configuration);
+builder.Services.AddServices();
 
 app.UseHttpsRedirection();
 
