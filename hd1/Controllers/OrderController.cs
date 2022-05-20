@@ -41,6 +41,7 @@ public class OrderController : ControllerBase
         {
             true => Ok(),
             _ => StatusCode(500),
+            // TODO implement more specific error: Forbidden if ParcelLocker is not active
         };
     }
 
