@@ -21,7 +21,7 @@ public class OrderService : IOrderService
         if (order is not null && order.StatusEnum is not OrderStatus.Cancelled)
         {
             order.Status = (int)OrderStatus.Cancelled;
-            _orderRepository.Update(order);
+            result = _orderRepository.Update(order.Id, order);
         }
         else
         {
@@ -39,8 +39,7 @@ public class OrderService : IOrderService
             && LockerExistsAndActive(order)
             )
         {
-            _orderRepository.Update(order);
-            result = true;
+            result = _orderRepository.Update(order.Id, order);
         }
         // TODO log why it cannot create order if there are errors, maybe add try-catch
         return result;
@@ -53,8 +52,7 @@ public class OrderService : IOrderService
             && LockerExistsAndActive(order)
             )
         {
-            _orderRepository.Create(order);
-            result = true;
+            result = _orderRepository.Create(order.Id, order);
         }
         // TODO log why it cannot update order if there are errors, maybe add try-catch
         return result;

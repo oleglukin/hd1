@@ -1,6 +1,6 @@
 ﻿namespace hd1.Repositories;
 
-public interface IRepository<TId, TModel>
+public interface IRepository<in TId, TModel>
 {
     /// <summary>
     /// Find model object by its id
@@ -12,7 +12,7 @@ public interface IRepository<TId, TModel>
     /// </summary>
     public IEnumerable<TModel> Filter(Func<TModel, bool> predicate);
 
-    public void Create(TModel order);
+    public bool Create(TId id, TModel model);
 
-    public void Update(TModel order);
+    public bool Update(TId id, TModel model);
 }

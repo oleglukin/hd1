@@ -38,13 +38,16 @@ public abstract class InMemoryRepository<TId, TModel> : IInMemoryRepository<TId,
     public IEnumerable<TModel> Filter(Func<TModel, bool> predicate) => _data.Values.Where(predicate);
 
 
-    public void Create(TModel order)
-    {
-        throw new NotImplementedException();
-    }
+    public bool Create(TId id, TModel model) => _data.TryAdd(id, model);
 
-    public void Update(TModel order)
+    public bool Update(TId id, TModel model)
     {
-        throw new NotImplementedException();
+        var result = false;
+        if (_data.ContainsKey(id))
+        {
+            _data[id] = model;
+            result = true;
+        }
+        return result;
     }
 }

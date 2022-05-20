@@ -1,4 +1,6 @@
-﻿namespace hd1.Models;
+﻿using System.Text.RegularExpressions;
+
+namespace hd1.Models;
     
 public class Order
 {
@@ -26,11 +28,14 @@ public class Order
     };
 
     private const int MaximumItems = 10;
+
     public string[]? Items { get; set; }
 
     public decimal Total { get; set; }
 
     public string? ParcelLockerId { get; set; }
+
+    private const string PhoneNumberRegexp = @"\+7\d\d\d-\d\d\d-\d\d-\d\d";
 
     public string? CustomerPhoneNumber { get; set; }
 
@@ -47,6 +52,12 @@ public class Order
         if (Items is not null && Items.Length > MaximumItems)
         {
             errors.Add($"Number of order items ({Items.Length}) is larger than maximum allowed ({MaximumItems})");
+        }
+
+        if (CustomerPhoneNumber is null ||
+            !Regex.IsMatch(CustomerPhoneNumber, PhoneNumberRegexp))
+        {
+            errors.Add("Customer phone number is unknown or has invalid format");
         }
 
         // TODO validate customer phone number, use regexp
