@@ -49,7 +49,7 @@ public class Order
             errors.Add($"Number of order items ({Items.Length}) is larger than maximum allowed ({MaximumItems})");
         }
 
-        // TODO validate customer phone number
+        // TODO validate customer phone number, use regexp
 
         return errors;
     }

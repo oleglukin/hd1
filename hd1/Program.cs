@@ -13,6 +13,9 @@ builder.Configuration
     .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
     .AddJsonFile($"appsettings.{Environments.Development}.json", optional: true, reloadOnChange: true);
 
+builder.Services.AddDataStorage(builder.Configuration);
+builder.Services.AddServices();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -21,9 +24,6 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
-builder.Services.AddDataStorage(builder.Configuration);
-builder.Services.AddServices();
 
 app.UseHttpsRedirection();
 

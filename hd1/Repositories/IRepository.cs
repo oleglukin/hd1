@@ -11,4 +11,8 @@ public interface IRepository<TId, TModel>
     /// Find all model objects by some filtering / predicate function
     /// </summary>
     public IEnumerable<TModel> Filter(Func<TModel, bool> predicate);
+
+    public void Create(TModel order);
+
+    public void Update(TModel order);
 }

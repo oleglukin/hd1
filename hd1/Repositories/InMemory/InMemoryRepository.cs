@@ -36,4 +36,15 @@ public abstract class InMemoryRepository<TId, TModel> : IInMemoryRepository<TId,
     }
     
     public IEnumerable<TModel> Filter(Func<TModel, bool> predicate) => _data.Values.Where(predicate);
+
+
+    public void Create(TModel order)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void Update(TModel order)
+    {
+        throw new NotImplementedException();
+    }
 }

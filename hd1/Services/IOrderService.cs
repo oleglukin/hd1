@@ -13,4 +13,6 @@ public interface IOrderService
     public bool Cancel(int id);
 
     public bool Create(Order value);
+
+    public bool Update(Order value);
 }

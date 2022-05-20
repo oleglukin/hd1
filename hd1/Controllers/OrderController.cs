@@ -37,13 +37,7 @@ public class OrderController : ControllerBase
     [HttpPost]
     public IActionResult Post([FromBody] Order value)
     {
-        var result = false;
-        if (!value.ValidationErrors().Any())
-        {
-            result = _orderService.Create(value);
-        }
-
-        return result switch
+        return _orderService.Create(value) switch
         {
             true => Ok(),
             _ => StatusCode(500),
@@ -55,8 +49,13 @@ public class OrderController : ControllerBase
     /// Update order information
     /// </summary>
     [HttpPut]
-    public void Put([FromBody] Order value)
+    public IActionResult Put([FromBody] Order value)
     {
+        return _orderService.Update(value) switch
+        {
+            true => Ok(),
+            _ => StatusCode(500),
+        };
     }
 
     [HttpPut("cancel/{id}")]
